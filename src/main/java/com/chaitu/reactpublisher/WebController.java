@@ -71,9 +71,28 @@ public class WebController {
 			transaction.setCust_nm(customer.getCustomerName());
 			transaction.setCust_nbr(customer.getCustomerNumber());
 			transaction.setTxn_dt(formatter.format(new Date()));
-			transaction.setRevenue_amt(new Integer(random.nextInt(1000)).toString());
-			transaction.setNo_of_pckgs(new Integer(random.nextInt(100)).toString());
+			String region = regions.get(random.nextInt(4));
 			transaction.setRegion(regions.get(random.nextInt(4)));
+			switch (region) {
+			case "US & CANADA":
+				transaction.setRevenue_amt(new Integer(random.nextInt(700) + 1).toString());
+				transaction.setNo_of_pckgs(new Integer(random.nextInt(100) +1).toString());	
+				break;
+			case "LATAM":
+				transaction.setRevenue_amt(new Integer(random.nextInt(100) + 1).toString());
+				transaction.setNo_of_pckgs(new Integer(random.nextInt(10) + 1).toString());
+				break;
+			case "EMEA":
+				transaction.setRevenue_amt(new Integer(random.nextInt(500) + 1).toString());
+				transaction.setNo_of_pckgs(new Integer(random.nextInt(50) + 1).toString());
+				break;
+			case "APAC":
+				transaction.setRevenue_amt(new Integer(random.nextInt(200) + 1).toString());
+				transaction.setNo_of_pckgs(new Integer(random.nextInt(20) + 1).toString());
+				break;
+			default:
+				break;
+			}	
 			this.pubSubTemplate.publish(topicName, transaction).addCallback(s3 -> {}, e3 -> {
                 System.err.println("Failed to push the transaction " + transaction + " with message: " + e3.getMessage());
             });
