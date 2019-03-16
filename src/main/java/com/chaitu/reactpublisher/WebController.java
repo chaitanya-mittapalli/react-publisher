@@ -39,6 +39,13 @@ public class WebController {
 		customers.put(7, new Customer("8",  "Atomic  Fiction"));
 		customers.put(8, new Customer("9",  "Wix"));
 		customers.put(9, new Customer("10", "Ubisoft"));
+		customers.put(10, new Customer("1",  "Snapchat"));
+		customers.put(11, new Customer("2",  "Airbnb"));
+		customers.put(12, new Customer("3",  "Costco"));
+		customers.put(13, new Customer("4",  "TiVo"));
+		customers.put(14, new Customer("1",  "Snapchat"));
+		customers.put(15, new Customer("2",  "Airbnb"));
+		customers.put(16, new Customer("1",  "Snapchat"));
 		regions.add("US & CANADA");
 		regions.add("LATAM");
 		regions.add("EMEA");
@@ -58,7 +65,7 @@ public class WebController {
 		System.out.println("********************** Started to stream Batch at " + formatter.format(new Date()) + "************************");
 		Random random = new Random();
 		IntStream.range(1, 301).parallel().forEach(i -> {
-			Customer customer  = customers.get(random.nextInt(10));
+			Customer customer  = customers.get(random.nextInt(17));
 			Transaction transaction = new Transaction();
 			transaction.setTxn_id(UUID.randomUUID().toString());
 			transaction.setCust_nm(customer.getCustomerName());
