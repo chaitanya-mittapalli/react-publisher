@@ -36,7 +36,7 @@ public class WebController {
 		customers.put(4, new Customer("5",  "Zillow"));
 		customers.put(5, new Customer("6",  "Citrix"));
 		customers.put(6, new Customer("7",  "Khan Academy"));
-		customers.put(7, new Customer("8",  "Atomic  Fiction"));
+		customers.put(7, new Customer("8",  "Atomic Â Fiction"));
 		customers.put(8, new Customer("9",  "Wix"));
 		customers.put(9, new Customer("10", "Ubisoft"));
 		customers.put(10, new Customer("1",  "Snapchat"));
@@ -62,7 +62,6 @@ public class WebController {
 	@GetMapping("/customer")
 	@Scheduled(cron = "*/20 * * * * ?")
 	public void generateCustomer() {		
-		System.out.println("********************** Started to stream Batch at " + formatter.format(new Date()) + "************************");
 		Random random = new Random();
 		IntStream.range(1, 301).parallel().forEach(i -> {
 			Customer customer  = customers.get(random.nextInt(17));
@@ -97,6 +96,6 @@ public class WebController {
                 System.err.println("Failed to push the transaction " + transaction + " with message: " + e3.getMessage());
             });
 		});
-		System.out.println("********************** Completed to Stream Batch at " + formatter.format(new Date()) +"************************");
+		System.out.println("********************** Completed Publishing 300 Transactions Stream Batch at " + formatter.format(new Date()) +"************************");
 	}
 }
